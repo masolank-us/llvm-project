@@ -686,8 +686,8 @@ public:
     // FIXME: clmul should really be Promote for any bitwidth under the largest
     // legal bitwidth for clmul. Using IndexTy instead of Ty is a hack to get
     // around that shortcoming.
-    IntegerType *IndexTy =
-        DL.getIndexType(Ty->getContext(), DL.getAllocaAddrSpace());
+    IntegerType *IndexTy = thisT()->DL.getIndexType(
+        Ty->getContext(), thisT()->DL.getAllocaAddrSpace());
     if (Ty->getBitWidth() > IndexTy->getBitWidth())
       return false;
 
