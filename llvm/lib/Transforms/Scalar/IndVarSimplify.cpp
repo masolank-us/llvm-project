@@ -607,7 +607,6 @@ bool IndVarSimplify::handlePointerIV(Loop *L, PHINode *PN) {
   // Helper lambda to create scaled GEP for pointer computation
   auto createScaledGEP = [&](Value *IntIV, Instruction *InsertPt,
                              const Twine &Name) -> Value * {
-
     // For stride of 1 use the IV directly (scaling handled by stride
     Value *ScaledIndex = IntIV;
     if (StrideInt != 1) {
@@ -618,7 +617,8 @@ bool IndVarSimplify::handlePointerIV(Loop *L, PHINode *PN) {
     }
 
     IRBuilder<> Builder(InsertPt);
-    Value *ComputedPtr = Builder.CreateGEP(ElemType, BasePtr, ScaledIndex, Name);
+    Value *ComputedPtr =
+        Builder.CreateGEP(ElemType, BasePtr, ScaledIndex, Name);
     return ComputedPtr;
   };
 
